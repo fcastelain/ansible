@@ -1,0 +1,13 @@
+---
+# - name: "Set the ssh key with the new user"
+#  hosts: all
+#  remote_user: root
+#  roles:
+#    - setting
+
+- name: "Installation of the mysql server"
+  hosts: apacheserver
+  remote_user: fcastelain
+  become: true
+  roles:
+    - {role: mysql, mysql_root_db_pass: root, mysql_db: none, mysql_users: none }

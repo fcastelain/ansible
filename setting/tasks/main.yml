@@ -1,0 +1,45 @@
+---
+# tasks file for setting
+    # Add a new group
+    - name: "Create a group"
+      group: name={{ user }} state=present
+
+    # Add a new user
+    - name: "Create a user"
+      user: name={{ user }} shell=/bin/bash group={{ user }}
+
+    # Create the .ssh directory
+    - name: "Create the .ssh directory"
+      file: path=/home/{{ user }}/.ssh state=directory owner={{ user }} group={{ user }} mode=0755
+
+    # Add the pub ssh key
+    - name: "Add the ssh pub key"
+      copy: src=~/.ssh/id_rsa.pub dest=/home/{{ user }}/.ssh/authorized_keys owner={{ user }} group={{ user }} mode=0644
+
+    # Install the sudo package to manage the root priviligies
+    - name: "Installation of sudo"
+      apt: name=sudo update_cache=yes state=latest
+
+    # Make the new user part of root
+    - name: "{{ user }} become root"
+      template: src=setting/files/sudoer dest=/etc/sudoers.d/{{ user }}-sudoer mode=0440
+
+    # Restart the sudo service
+    - name: "Restart sudo service"
+      service: name=sudo state=restarted
+
+    # Refuse the root log
+    - name: "Disallow root SSH access"
+      lineinfile: dest=/etc/ssh/sshd_config regexp="^PermitRootLogin" line="PermitRootLogin no" state=present
+
+    # Refuse the log with password
+    - name: "Disallow password authentication"
+      lineinfile: dest=/etc/ssh/sshd_config regexp="^PasswordAuthentication" line="PasswordAuthentication no" state=present
+
+    # Change the default SSH port
+    - name: "Change SSH port"
+      lineinfile: dest=/etc/ssh/sshd_config regexp="Port 22" line="Port {{ ssh_port }}" state=present
+
+    # Restart the ssh service
+    - name: "Restart ssh service"
+      service: name=ssh state=restarted
