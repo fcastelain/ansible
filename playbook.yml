@@ -1,13 +1,17 @@
 ---
-# - name: "Set the ssh key with the new user"
-#  hosts: all
-#  remote_user: root
-#  roles:
-#    - setting
+- name: "Set the ssh key with the new user"
+  hosts: all
+  remote_user: root
+  roles:
+    - setting
 
 - name: "Installation of the mysql server"
-  hosts: apacheserver
+  hosts: dbserver
   remote_user: fcastelain
   become: true
+  vars:
+    ansible_port: "14159"
+  vars_files:
+    - mysql/vars/main.yml
   roles:
-    - {role: mysql, mysql_root_db_pass: root, mysql_db: none, mysql_users: none }
+    - { role: mysql }

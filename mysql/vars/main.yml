@@ -1,4 +1,11 @@
----
-env:
- RUNLEVEL: 1
-
+mysql_root_password: root
+user_mysql: fcastelain
+mysql_databases:
+  - name: "{{ user_mysql }}_db"
+    encoding: latin1
+    collation: latin1_general_ci
+mysql_users:
+  - name: "{{ user_mysql }}"
+    host: "%"
+    password: "123"
+    priv: "{{ user_mysql }}_db.*:ALL"

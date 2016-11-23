@@ -1,26 +1,22 @@
 ---
-galaxy_info:
-  author: "Benno Joy"
-  company: AnsibleWorks
-  license: license (BSD)
-  min_ansible_version: 1.4 
-  platforms:
-   - name: EL
-     versions:
-      - 5
-      - 6
-   - name: Fedora
-     versions:
-      - 16
-      - 17
-      - 18
-   - name: Ubuntu
-     versions:
-      - precise
-      - quantal
-      - raring
-      - saucy
-  categories:
-   - database:sql
 dependencies: []
-  
+
+galaxy_info:
+  author: geerlingguy
+  description: MySQL server for RHEL/CentOS and Debian/Ubuntu.
+  company: "Midwestern Mac, LLC"
+  license: "license (BSD, MIT)"
+  min_ansible_version: 1.9
+  platforms:
+    - name: EL
+      versions:
+      - 6
+      - 7
+    - name: Ubuntu
+      versions:
+      - all
+    - name: Debian
+      versions:
+      - all
+  galaxy_tags:
+    - database
