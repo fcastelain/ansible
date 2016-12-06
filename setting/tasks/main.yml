@@ -22,7 +22,7 @@
 
     # Make the new user part of root
     - name: "{{ user }} become root"
-      template: src=setting/files/sudoer dest=/etc/sudoers.d/{{ user }}-sudoer mode=0440
+      template: src=setting/templates/sudoer dest=/etc/sudoers.d/{{ user }}-sudoer mode=0440
 
     # Restart the sudo service
     - name: "Restart sudo service"

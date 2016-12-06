@@ -3,6 +3,10 @@ mysql_user_home: /root
 mysql_root_username: root
 mysql_root_password: root
 
+# name of the deamon needed to run
+mysql_daemon: mysql
+mysql_supports_innodb_large_prefix: true
+
 # Set this to `yes` to forcibly update the root password.
 mysql_root_password_update: no
 
@@ -12,8 +16,8 @@ mysql_enabled_on_startup: yes
 overwrite_global_mycnf: yes
 
 # The following variables have a default value depending on operating system.
-# mysql_config_file: /etc/my.cnf
-# mysql_config_include_dir: /etc/my.cnf.d
+mysql_config_file: /etc/my.cnf
+mysql_config_include_dir: /etc/my.cnf.d
 
 # Pass in a comma-separated list of repos to use (e.g. "remi,epel"). Used only
 # for RedHat systems (and derivatives).
@@ -21,10 +25,9 @@ mysql_enablerepo: ""
 
 # Define a custom list of packages to install; if none provided, the default
 # package list from vars/[OS-family].yml will be used.
-# mysql_packages:
-#   - mysql
-#   - mysql-server
-#   - MySQL-python
+mysql_packages:
+   - mysql-common
+   - mysql-server
 
 # MySQL connection settings.
 mysql_port: "3306"
@@ -32,14 +35,14 @@ mysql_bind_address: '0.0.0.0'
 mysql_skip_name_resolve: no
 mysql_datadir: /var/lib/mysql
 # The following variables have a default value depending on operating system.
-# mysql_pid_file: /var/run/mysqld/mysqld.pid
-# mysql_socket: /var/lib/mysql/mysql.sock
+mysql_pid_file: /var/run/mysqld/mysqld.pid
+mysql_socket: /var/lib/mysql/mysql.sock
 
 # Slow query log settings.
 mysql_slow_query_log_enabled: no
 mysql_slow_query_time: "2"
 # The following variable has a default value depending on operating system.
-# mysql_slow_query_log_file: /var/log/mysql-slow.log
+mysql_slow_query_log_file: /var/log/mysql-slow.log
 
 # Memory settings (default values optimized ~512MB RAM).
 mysql_key_buffer_size: "256M"
@@ -80,8 +83,8 @@ mysql_mysqldump_max_allowed_packet: "64M"
 # Logging settings.
 mysql_log: ""
 # The following variables have a default value depending on operating system.
-# mysql_log_error: /var/log/mysql.err
-# mysql_syslog_tag: mysql
+mysql_log_error: /var/log/mysql.err
+mysql_syslog_tag: mysql
 
 mysql_config_include_files: []
 #  - src: path/relative/to/playbook/file.cnf

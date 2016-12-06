@@ -1,11 +1,11 @@
-mysql_root_password: root
-user_mysql: fcastelain
+---
+mysql_root_password: "root"
 mysql_databases:
-  - name: "{{ user_mysql }}_db"
+  - name: example_db
     encoding: latin1
     collation: latin1_general_ci
 mysql_users:
-  - name: "{{ user_mysql }}"
+  - name: example_user
     host: "%"
     password: "123"
-    priv: "{{ user_mysql }}_db.*:ALL"
+    priv: "example_db.*:ALL"

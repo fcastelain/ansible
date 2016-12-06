@@ -1,15 +1,6 @@
 ---
-# Variable configuration.
-- include: variables.yml
-
 # Setup/install tasks.
-- include: setup-RedHat.yml
-  when: ansible_os_family == 'RedHat'
-  static: no
-
 - include: setup-Debian.yml
-  when: ansible_os_family == 'Debian'
-  static: no
 
 - name: Check if MySQL packages were installed.
   set_fact:
@@ -20,4 +11,3 @@
 - include: secure-installation.yml
 - include: databases.yml
 - include: users.yml
-- include: replication.yml
